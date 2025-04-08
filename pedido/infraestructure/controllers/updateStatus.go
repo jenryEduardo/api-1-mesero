@@ -19,17 +19,22 @@ func UpdateStatusPedido(c *gin.Context) {
 		return
 	}
 
-	var status string
-
-	if err := c.ShouldBindJSON(&status); err != nil {
+	type StatusRequest struct {
+		Status string `json:"status"`
+	}
+	
+	var req StatusRequest
+	
+	if err := c.ShouldBindJSON(&req); err != nil {
 		c.JSON(http.StatusForbidden, gin.H{"error": "no se pudo decodificar el archivo json"})
 		return
 	}
+	
 
 	repo := infraestructure.NewMySQLRepository()
 	useCase := application.NewUpdateStatusPedido(repo)
 
-	if err := useCase.Execute(id, status); err != nil {
+	if err := useCase.Execute(id, req.Status); err != nil {
 		c.JSON(http.StatusConflict, gin.H{"error": "no se pudo realizar la solicitud"})
 		return
 	}
