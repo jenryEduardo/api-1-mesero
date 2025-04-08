@@ -17,6 +17,7 @@ func SetUpRoutes(routes *gin.Engine){
 	router.GET("/:idPedido",controllers.GetByIdPedido)
 	router.DELETE("/:idPedido",controllers.DeletePedido)
 	router.PUT("/:idPedido",controllers.UpdatePedido)
+	router.PUT("/status/:idPedido",controllers.UpdateStatusPedido)
 }
 
 

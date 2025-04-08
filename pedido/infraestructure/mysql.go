@@ -80,6 +80,15 @@ func (r *MySQLRepository) Update(id int, pedido *domain.Pedido) error {
 	return err
 }
 
+func (r *MySQLRepository) UpdateStatus(id int, status string) error {
+	query := ("UPDATE pedido SET status=? where idPedido=?")
+	_, err := r.conn.DB.Exec(query, status, id)
+	if err != nil {
+		return err
+	}
+	return err
+}
+
 func (r *MySQLRepository) Delete(id int) error {
 	query := ("DELETE FROM pedido WHERE idPedido=?")
 	_, err := r.conn.DB.Exec(query, id)

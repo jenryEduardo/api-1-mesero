@@ -3,6 +3,7 @@ package domain
 type Ipedido interface{
 	Save(pedido *Pedido)(int64,error)
 	Update(id int,pedido *Pedido)error
+	UpdateStatus(id int,status string)error
 	Delete(id int)error
 	ObtenerTotalPedido(id int)(float64, error)
 	GetAll()([]Pedido,error)
